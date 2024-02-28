@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogpostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/blogpost');
+
+Route::get('/blogpost', [BlogpostController::class, 'index'])->name('blogpost.index');
+Route::get('/blogpost/all', [BlogpostController::class, 'all'])->name('blogpost.all');
