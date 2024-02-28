@@ -1,5 +1,32 @@
 <div class="h-24">
-    <div class="pt-10 flex flex-col md:flex-row justify-between">
+    @if (Auth::check())
+    <div class="flex justify-end space-x-7 pr-16 mt-6 items-center">
+        <span class="text-lg font-semibold text-white">
+            {{ Auth::user()->name }}
+        </span>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="px-4 py-1 bg-indigo-500 rounded">
+                <span class="text-white">Logout</span>
+            </button>
+        </form>
+    </div>
+    @endif
+    @if (! Auth::check())
+    <div class="flex justify-end space-x-2 pr-16 mt-6 items-center">
+        <a href="{{ route('login') }}">
+            <button class="px-4 py-1 bg-indigo-500 rounded">
+                <span class="text-white">Login</span>
+            </button>
+        </a>
+        <a href="{{ route('register') }}">
+            <button class="px-4 py-1 bg-indigo-500 rounded">
+                <span class="text-white">Register</span>
+            </button>
+        </a>
+    </div>
+    @endif
+    <div class="pt-5 flex flex-col md:flex-row justify-between">
         <div class="sm:ml-8 md:ml-16 ml-3 flex md:justify-start justify-center items-center">
             <span class="text-2xl font-semibold">
                 Programming Blog
@@ -15,14 +42,6 @@
                 </li>
                 <!-- implement authentication for creating posts -->
             </ul>
-            <div class="flex space-x-2 pr-10">
-                <button class="px-4 py-1 bg-indigo-500 rounded">
-                    <span class="text-white">Login</span>
-                </button>
-                <button class="px-4 py-1 bg-indigo-500 rounded">
-                    <span class="text-white">Register</span>
-                </button>
-            </div>
         </div>
     </div>
 </div>
