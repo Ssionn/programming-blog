@@ -31,7 +31,7 @@ class OAuthController extends Controller
                     'username' => User::generateUsername($socialUser->getNickname()),
                     'provider' => $provider,
                     'provider_id' => $socialUser->getId(),
-                    'provider_token' => $socialUser->token,
+                    'provider_token' => bcrypt($socialUser->token),
                     'email_verified_at' => now(),
                 ]);
             }
