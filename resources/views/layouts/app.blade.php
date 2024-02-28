@@ -15,7 +15,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-gradient-to-r from-[#D4145A] to-[#FBB03B] h-full">
+<body class="bg-gradient-to-r from-[#D4145A] to-[#FBB03B] h-full mb-20">
     <header>
         @include('components.navigation')
     </header>

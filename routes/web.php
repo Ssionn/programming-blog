@@ -21,6 +21,12 @@ Route::redirect('/', '/blogpost');
 
 Route::get('/blogpost', [BlogpostController::class, 'index'])->name('blogpost.index');
 Route::get('/blogpost/all', [BlogpostController::class, 'all'])->name('blogpost.all');
+Route::get('/blogpost/create', [BlogpostController::class, 'create'])->name('blogpost.create');
+Route::post('/blogpost/store', [BlogpostController::class, 'store'])->name('blogpost.store');
+Route::delete('/blogpost/delete/{id}', [BlogpostController::class, 'delete'])->name('blogpost.delete');
+
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
@@ -28,6 +34,3 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/auth/{provider}/redirect', [OAuthController::class, 'redirect']);
 Route::get('/auth/{provider}/callback', [OAuthController::class, 'callback']);
-
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
