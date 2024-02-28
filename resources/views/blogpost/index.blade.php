@@ -30,7 +30,7 @@
             </div>
             @endforeach
             @else
-            <p class="text-center text-2xl font-semibold">No featured posts available</p>
+            <p class="text-center text-white text-2xl font-semibold">No featured posts available</p>
             @endif
         </div>
         <div class="w-1/3">
