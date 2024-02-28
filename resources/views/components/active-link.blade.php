@@ -2,7 +2,7 @@
 
 @php
 
-$classes = $active ?? false ? 'flex items-center rounded-lg text-white' : 'flex items-center rounded-lg text-gray-600 hover:text-white';
+$classes = $active ?? false ? 'flex items-center rounded-lg text-white underline hover:text-white' : 'flex items-center rounded-lg';
 
 @endphp
 
