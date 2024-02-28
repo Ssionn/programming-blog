@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
 
 <head>
     <meta charset="utf-8">
@@ -15,7 +15,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-gradient-to-r from-[#D4145A] to-[#FBB03B]">
+<body class="bg-gradient-to-r from-[#D4145A] to-[#FBB03B] h-full">
     <header>
         @include('components.navigation')
     </header>
