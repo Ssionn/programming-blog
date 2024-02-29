@@ -37,6 +37,12 @@ class LoginController extends Controller
         Auth::logout();
 
         if ($request->session()->has('provider')) {
+            if (! $request->session()->has('token')) {
+                $request->session()->regenerateToken();
+
+                return redirect()->route('blogpost.index');
+            }
+
             $request->session()->invalidate();
 
             $request->session()->regenerateToken();
