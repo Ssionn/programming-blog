@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\OAuthController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BlogpostController;
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,7 @@ Route::get('/blogpost', [BlogpostController::class, 'index'])->name('blogpost.in
 Route::get('/blogpost/all', [BlogpostController::class, 'all'])->name('blogpost.all');
 Route::get('/blogpost/create', [BlogpostController::class, 'create'])->name('blogpost.create');
 Route::post('/blogpost/store', [BlogpostController::class, 'store'])->name('blogpost.store');
+Route::post('/upload/{id}', [UploadController::class, 'store'])->name('upload.store');
 Route::delete('/blogpost/delete/{id}', [BlogpostController::class, 'delete'])->name('blogpost.delete');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');

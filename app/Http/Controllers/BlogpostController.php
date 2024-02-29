@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Repositories\ImageRepository;
 use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
 use Illuminate\Support\Facades\Auth;
@@ -9,15 +11,19 @@ use Illuminate\Support\Facades\Auth;
 class BlogpostController extends Controller
 {
     public function __construct(
-        protected PostRepository $postRepository
+        protected PostRepository $postRepository,
+        protected ImageRepository $imageRepository,
     ) {
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $posts = $this->postRepository->getPostsByUser();
+        $postId = $request->postId;
 
-        return view('blogpost.index', compact('posts'));
+        $posts = $this->postRepository->getPostsByUser();
+        $images = $this->imageRepository->storeImagesInArray($postId);
+
+        return view('blogpost.index', compact('posts', 'images'));
     }
 
     public function all()
@@ -29,7 +35,15 @@ class BlogpostController extends Controller
 
     public function create()
     {
-        return view('blogpost.create');
+        if (! Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $post = new Post();
+        $post->user_id = auth()->id();
+        $post->save();
+
+        return view('blogpost.create', ['id' => $post->id]);
     }
 
     public function store(Request $request)
@@ -39,7 +53,7 @@ class BlogpostController extends Controller
             'content' => 'required',
         ]);
 
-        $this->postRepository->createPost($request->title, $request->content, auth()->id());
+        $this->postRepository->editPost($request->title, $request->content, auth()->id());
 
         return redirect()->route('blogpost.index');
     }
