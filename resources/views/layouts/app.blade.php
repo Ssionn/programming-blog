@@ -4,23 +4,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <title>@yield('title')</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
 
     @vite('resources/css/app.css')
+    @stack('scripts')
 </head>
 
-<body class="bg-gradient-to-r from-[#D4145A] to-[#FBB03B] h-full mb-20">
+<body class="bg-gradient-to-r from-[#D4145A] to-[#FBB03B] h-full">
     <header>
         @include('components.navigation')
     </header>
 
-    <main>
+    <main class="">
         @yield('content')
     </main>
 
@@ -34,6 +35,9 @@
         </div>
     </div>
     @endif
+
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+    @yield('scripts')
 </body>
 
 </html>

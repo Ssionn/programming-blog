@@ -3,37 +3,28 @@
 @section('title', 'HomePage')
 
 @section('content')
-    <div class="flex justify-center flex-col mt-10">
+    <div class="flex justify-center flex-col md:mt-10">
         @if ($posts->count() > 0)
-            <h1 class="text-xl font-semibold text-white text-center mt-10">Featured Blog Posts</h1>
+            <h1 class="text-2xl md:text-4xl font-semibold text-white text-center mt-10">Featured Blog Posts</h1>
         @else
-            <p class="text-center text-white text-2xl font-semibold">No featured posts available</p>
+            <p class="text-center text-white text-2xl md:text-4xl font-semibold mt-10">No featured posts available</p>
         @endif
 
-        @if (Auth::check())
-            <div class="flex justify-end pr-16 items-center">
-                <form action="{{ route('blogpost.create') }}" method="GET">
-                    <button type="submit" class="px-4 py-1 bg-indigo-500 rounded">
-                        <span class="text-white">Create Post</span>
-                    </button>
-                </form>
+        <div class="flex flex-col justify-center sm:flex-row items-center mt-10 mb-20">
+            <div class="w-1/12 md:w-1/5">
             </div>
-        @endif
-        <div class="flex flex-col sm:flex-row items-center mt-10 mb-20">
-            <div class="w-1/3">
-            </div>
-            <div class="w-2/4 space-y-10">
+            <div class="w-full md:w-2/4 space-y-10 p-4 md:p-0">
                 @if ($posts->count() > 0)
-                    @foreach ($posts as $author)
+                    @foreach ($posts as $post)
                         <div class="flex flex-col bg-white rounded-lg border border-gray-200">
                             <div class="flex justify-between items-center p-8">
                                 <div class="flex items-center">
                                     <div class="ml-2">
-                                        <p class="text-sm font-semibold">{{ $author->name }}</p>
+                                        <p class="text-sm font-semibold">{{ $post->name }}</p>
                                     </div>
                                 </div>
-                                @if (Auth::check() && Auth::user()->id === $author->user_id)
-                                    <form action="{{ route('blogpost.delete', $author->id) }}" method="POST">
+                                @if (Auth::check() && Auth::user()->id === $post->user_id)
+                                    <form action="{{ route('blogpost.delete', $post->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-gray-500 hover:text-red-500">
@@ -47,13 +38,15 @@
                                 @endif
                             </div>
                             <div class="px-4 pb-2 pl-10 pr-10">
-                                <h1 class="text-xl font-semibold">{{ $author->title }}</h1>
-                                <p class="mt-2 text-gray-700">{{ $author->content }}</p>
-                                @if ($author->image)
-                                    <div class="mt-2">
-                                        <img src="{{ $author->image }}" alt="Post Image" class="w-full rounded-lg">
+                                <h1 class="text-xl font-semibold">{{ $post->title }}</h1>
+
+                                @foreach ($images as $image)
+                                    <div class="mt-10">
+                                        <img src="{{ $image['path'] }}" alt="Post Image" class="w-full rounded-lg">
                                     </div>
-                                @endif
+                                @endforeach
+
+                                <p class="mt-6 text-gray-700">{{ $post->content }}</p>
                             </div>
                             <div class="flex justify-between items-center px-4 py-2 border-t border-gray-200 mt-4">
                                 {{-- Comment Section --}}
@@ -68,7 +61,7 @@
                     @endforeach
                 @endif
             </div>
-            <div class="w-1/3">
+            <div class="w-1/12 md:w-1/5">
             </div>
         </div>
     </div>

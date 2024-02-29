@@ -4,10 +4,11 @@
 
 @section('content')
     <div class="flex flex-col sm:flex-row justify-center mt-10">
-        <div class="w-1/3">
+        <div class="w-1/12 md:w-1/3">
         </div>
-        <div class="w-2/4">
+        <div class="sm:w-full md:w-2/4 p-4 md:p-0">
             <form method="POST" action="{{ route('blogpost.store') }}">
+                <input type="hidden" name="id" value="{{ $id }}">
                 @csrf
                 <div class="space-y-12">
                     <div class="border-b border-gray-900/10 pb-4 bg-white rounded-md px-4">
@@ -26,7 +27,8 @@
                             </div>
 
                             <div class="col-span-full">
-                                {{-- add image --}}
+                                <h1 class="text-red-500 text-xl text-center mt-2">Work In Progress</h1>
+                                <input type="file" disabled name="avatar" id="avatar" />
                             </div>
 
                             <div class="col-span-full">
@@ -47,7 +49,27 @@
                 </div>
             </form>
         </div>
-        <div class="w-1/3">
+        <div class="w-1/12 md:w-1/3">
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        const inputElement = document.querySelector('input[id="avatar"]');
+        const pond = FilePond.create(inputElement, {
+            allowMultiple: false,
+            maxFiles: 1,
+            server: {
+                process: {
+                    url: '/upload/{{ $id }}',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    timeout: 2000
+                }
+            },
+            instantUpload: true
+        });
+    </script>
 @endsection

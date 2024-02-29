@@ -43,13 +43,14 @@ class LoginController extends Controller
                 return redirect()->route('blogpost.index');
             }
 
-            $request->session()->invalidate();
-
-            $request->session()->regenerateToken();
-
-            return redirect()->route('blogpost.index');
+            $this->sessionInvalidationAndRedirect($request);
         }
 
+        $this->sessionInvalidationAndRedirect($request);
+    }
+
+    protected function sessionInvalidationAndRedirect(Request $request)
+    {
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();

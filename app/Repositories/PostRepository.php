@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PostRepository
 {
@@ -25,22 +26,29 @@ class PostRepository
     {
         $users = DB::table('users')
             ->join('posts', 'users.id', '=', 'posts.user_id')
-            ->select('posts.id', 'users.name', 'posts.title', 'posts.content', 'posts.user_id', 'posts.image')
+            ->select('posts.id', 'users.name', 'posts.title', 'posts.content', 'posts.user_id')
             ->get();
 
         return $users;
     }
 
-    public function createPost($title, $content, $userId)
+    public function editPost($title, $content, $userId)
     {
         return DB::table('posts')
-            ->insert([
+            ->update([
                 'title' => $title,
                 'content' => $content,
                 'user_id' => $userId,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+    }
+
+    public function findPostById($id)
+    {
+        return DB::table('posts')
+            ->where('id', $id)
+            ->first();
     }
 
     public function deletePost($id)
