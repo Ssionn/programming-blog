@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Repositories\ImageRepository;
 use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\ImageRepository;
 
 class BlogpostController extends Controller
 {
@@ -20,17 +20,10 @@ class BlogpostController extends Controller
     {
         $postId = $request->postId;
 
-        $posts = $this->postRepository->getPostsByUser();
+        $posts = $this->postRepository->posts();
         $images = $this->imageRepository->storeImagesInArray($postId);
 
         return view('blogpost.index', compact('posts', 'images'));
-    }
-
-    public function all()
-    {
-        $allPosts = $this->postRepository->allPosts();
-
-        return view('blogpost.all', compact('allPosts'));
     }
 
     public function create()

@@ -40,10 +40,6 @@
                     <x-active-link :active="request()->routeIs('blogpost.index')" href="{{ route('blogpost.index') }}"
                         class="font-semibold text-white hover:text-gray-500">Home</x-active-link>
                 </li>
-                <li>
-                    <x-active-link :active="request()->routeIs('blogpost.all')" href="{{ route('blogpost.all') }}"
-                        class="font-semibold text-white hover:text-gray-500">All Posts</x-active-link>
-                </li>
                 @if (Auth::check())
                     <li>
                         <x-active-link :active="request()->routeIs('blogpost.create')" href="{{ route('blogpost.create') }}"

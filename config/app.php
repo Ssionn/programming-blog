@@ -159,6 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Usamamuneerchaudhary\Commentify\Providers\CommentifyServiceProvider::class,
 
         /*
          * Application Service Providers...

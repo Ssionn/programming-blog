@@ -16,17 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
-
-        User::all()->each(function (User $user) {
-            $user->posts()->saveMany(Post::factory(5)->make());
-
-            $user->posts->each(function (Post $post) use ($user) {
-                $post->comments()->saveMany(Comment::factory(5)->make([
-                    'post_id' => $post->id,
-                    'user_id' => $user->id,
-                ]));
-            });
-        });
+        //
     }
 }

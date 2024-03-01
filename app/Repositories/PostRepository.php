@@ -2,34 +2,14 @@
 
 namespace App\Repositories;
 
+use App\Models\Post;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class PostRepository
 {
-    public function featuredPosts()
+    public function posts()
     {
-        return DB::table('posts')
-            ->limit(5)
-            ->get();
-    }
-
-    public function allPosts()
-    {
-        return DB::table('posts')
-            ->inRandomOrder()
-            ->latest()
-            ->get();
-    }
-
-    public function getPostsByUser()
-    {
-        $users = DB::table('users')
-            ->join('posts', 'users.id', '=', 'posts.user_id')
-            ->select('posts.id', 'users.name', 'posts.title', 'posts.content', 'posts.user_id')
-            ->get();
-
-        return $users;
+        return Post::all();
     }
 
     public function editPost($title, $content, $userId)
