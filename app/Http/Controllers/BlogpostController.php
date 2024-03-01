@@ -32,11 +32,15 @@ class BlogpostController extends Controller
             return redirect()->route('login');
         }
 
-        $post = new Post();
-        $post->user_id = auth()->id();
-        $post->save();
+        // The id for the images to link to.
+        // $post = new Post();
+        // $post->user_id = auth()->id();
+        // $post->save();
 
-        return view('blogpost.create', ['id' => $post->id]);
+        // change this back to:
+        // return view('blogpost.create', ['id' => $post->id]);
+        // when implementing images.
+        return view('blogpost.create');
     }
 
     public function store(Request $request)
@@ -46,7 +50,8 @@ class BlogpostController extends Controller
             'content' => 'required',
         ]);
 
-        $this->postRepository->editPost($request->title, $request->content, auth()->id());
+        // change method to editPost when implementing images.
+        $this->postRepository->storePost($request->title, $request->content, auth()->id());
 
         return redirect()->route('blogpost.index');
     }

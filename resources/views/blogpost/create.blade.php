@@ -3,18 +3,21 @@
 @section('title', 'Create Blog Post')
 
 @section('content')
-    <div class="flex flex-col sm:flex-row justify-center mt-10">
+    <div class="flex justify-center items-center flex-col md:mt-10">
+        <h1 class="text-2xl md:text-4xl font-semibold text-white text-center">Create a post</h1>
         <div class="w-1/12 md:w-1/3">
         </div>
         <div class="sm:w-full md:w-2/4 p-4 md:p-0">
             <form method="POST" action="{{ route('blogpost.store') }}">
-                <input type="hidden" name="id" value="{{ $id }}">
+                {{-- For the id to be passed to images --}}
+                {{-- <input type="hidden" name="id" value="{{ $id }}"> --}}
                 @csrf
                 <div class="space-y-12">
                     <div class="border-b border-gray-900/10 pb-4 bg-white rounded-md px-4">
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div class="sm:col-span-4 mt-4">
-                                <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Title</label>
+                                <label for="title"
+                                    class="block text-sm font-medium leading-6 text-gray-900">Title</label>
                                 <div class="mt-2">
                                     <div
                                         class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -62,7 +65,9 @@
             maxFiles: 1,
             server: {
                 process: {
-                    url: '/upload/{{ $id }}',
+                    // linking post with image
+                    // url: '/upload/'
+                    url: '/upload',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },

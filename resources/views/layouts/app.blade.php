@@ -11,10 +11,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-
-    @vite('resources/css/app.css')
+    @vite('resources/css/app.css', 'resources/js/app.js')
     @livewireStyles
-    @stack('scripts')
 </head>
 
 <body class="bg-gradient-to-r from-[#D4145A] to-[#FBB03B]">
@@ -37,9 +35,9 @@
     </div>
     @endif
 
-    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
     @yield('scripts')
     @livewireScripts
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 </body>
 
 </html>

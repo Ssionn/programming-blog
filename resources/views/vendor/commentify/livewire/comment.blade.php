@@ -8,7 +8,7 @@
             'button' => 'Edit Comment',
         ])
     @else
-        <article class="p-6 mb-1 text-base bg-gray-100 shadow-xl border border-gray-300 rounded-lg">
+        <article class="p-6 mb-1 text-baseshadow-xl border border-gray-300 rounded-lg">
             <footer class="flex justify-between items-center mb-1">
 
 
@@ -98,13 +98,13 @@
     @endif
     <script>
         function detectAtSymbol() {
-            const textarea = document.getElementById('reply-comment');
-            if (!textarea) {
+            const inputComment = document.getElementById('reply-comment');
+            if (!inputComment) {
                 return;
             }
 
-            const cursorPosition = textarea.selectionStart;
-            const textBeforeCursor = textarea.value.substring(0, cursorPosition);
+            const cursorPosition = inputComment.selectionStart;
+            const textBeforeCursor = inputComment.value.substring(0, cursorPosition);
             const atSymbolPosition = textBeforeCursor.lastIndexOf('@');
 
             if (atSymbolPosition !== -1) {

@@ -9,15 +9,16 @@
     @endif
     @csrf
     <div
-        class="py-2 px-4 mb-4 rounded-lg rounded-t-lg bg-gray-100 shadow-xl border border-gray-300
+        class="py-2 px-4 mb-4 rounded-lg rounded-t-lg shadow-xl border
              ">
         <label for="{{$inputId}}" class="sr-only">{{$inputLabel}}</label>
-        <textarea id="{{$inputId}}" rows="6"
-                  class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none@error($state.'.body')
+        <input id="{{$inputId}}" rows="6"
+                  class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none @error($state.'.body')
+                        border-red-300 @enderror"
                   placeholder="Write a comment..."
                   wire:model.live="{{$state}}.body"
                   oninput="detectAtSymbol()"
-        ></textarea>
+        ></input>
         @if(!empty($users) && $users->count() > 0)
             @include('commentify::livewire.partials.dropdowns.users')
         @endif

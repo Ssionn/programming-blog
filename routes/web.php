@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\BlogpostController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\OAuthController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -18,13 +19,21 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
-Route::redirect('/', '/blogpost');
+Route::redirect('/', '/blogpost', 308);
 
 Route::get('/blogpost', [BlogpostController::class, 'index'])->name('blogpost.index');
-Route::get('/blogpost/create', [BlogpostController::class, 'create'])->name('blogpost.create');
-Route::post('/blogpost/store', [BlogpostController::class, 'store'])->name('blogpost.store');
-Route::post('/upload/{id}', [UploadController::class, 'store'])->name('upload.store');
-Route::delete('/blogpost/delete/{id}', [BlogpostController::class, 'delete'])->name('blogpost.delete');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/blogpost/create', [BlogpostController::class, 'create'])->name('blogpost.create');
+    Route::post('/blogpost/store', [BlogpostController::class, 'store'])->name('blogpost.store');
+    Route::post('/upload/{id}', [UploadController::class, 'store'])->name('upload.store');
+    Route::delete('/blogpost/delete/{id}', [BlogpostController::class, 'delete'])->name('blogpost.delete');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
+    Route::patch('/settings', [SettingsController::class, 'update'])->name('settings.update');
+});
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');

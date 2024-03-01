@@ -5,9 +5,9 @@
 @section('content')
     <div class="flex justify-center flex-col md:mt-10">
         @if ($posts->count() > 0)
-            <h1 class="text-2xl md:text-4xl font-semibold text-white text-center mt-10">Featured Blog Posts</h1>
+            <h1 class="text-2xl md:text-4xl font-semibold text-white text-center">Featured Blog Posts</h1>
         @else
-            <p class="text-center text-white text-2xl md:text-4xl font-semibold mt-10">No featured posts available</p>
+            <p class="text-center text-white text-2xl md:text-4xl font-semibold">No featured posts available</p>
         @endif
 
         <div class="flex flex-col justify-center sm:flex-row items-center mt-10 mb-20">
