@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -13,10 +13,11 @@
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
 
     @vite('resources/css/app.css')
+    @livewireStyles
     @stack('scripts')
 </head>
 
-<body class="bg-gradient-to-r from-[#D4145A] to-[#FBB03B] h-full">
+<body class="bg-gradient-to-r from-[#D4145A] to-[#FBB03B]">
     <header>
         @include('components.navigation')
     </header>
@@ -38,6 +39,7 @@
 
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
     @yield('scripts')
+    @livewireScripts
 </body>
 
 </html>
