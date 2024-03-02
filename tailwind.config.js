@@ -4,11 +4,13 @@ export default {
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
+        "./node_modules/flowbite/**/*.js",
     ],
     theme: {
         extend: {},
     },
     plugins: [
         require('@tailwindcss/forms'),
+        require('flowbite/plugin')
     ],
 }

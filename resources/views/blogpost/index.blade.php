@@ -3,11 +3,24 @@
 @section('title', 'HomePage')
 
 @section('content')
-    <div class="flex justify-center flex-col md:mt-10">
+    <div class="flex justify-center flex-col md:mt-10 w-full">
+        @if (session('status') === 'account-deleted')
+            <div class="flex justify-center items-center">
+                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)"
+                    class="text-sm text-white bg-green-900 rounded-md p-2 mt-2">
+                    @auth
+                        {{ __('Account Succesfully Deleted') }}
+                    @else
+                        {{ __('Account Succesfully Deleted') }}
+                    @endauth
+                </p>
+            </div>
+        @endif
+
         @if ($posts->count() > 0)
-            <h1 class="text-2xl md:text-4xl font-semibold text-white text-center">Featured Blog Posts</h1>
+            <h1 class="text-2xl md:text-4xl font-semibold text-white text-center mt-5">Featured Blog Posts</h1>
         @else
-            <p class="text-center text-white text-2xl md:text-4xl font-semibold">No featured posts available</p>
+            <p class="text-center text-white text-2xl md:text-4xl font-semibold mt-5">No featured posts available</p>
         @endif
 
         <div class="flex flex-col justify-center sm:flex-row items-center mt-10 mb-20">
