@@ -13,6 +13,11 @@ class PostRepository
         return Post::all();
     }
 
+    public function showPost($id)
+    {
+        return Post::findOrFail($id);
+    }
+
     public function editPost($title, $content, $userId)
     {
         return DB::table('posts')

@@ -9,7 +9,7 @@
 
     @if (auth()->user()->password === null)
         <div>
-            <p class="text-red-500 text-xs">To be able to delete your account you have to set a password up first</p>
+            <p class="text-red-500 text-xs">To be able to delete your account, you have to set a password up first.</p>
         </div>
     @endif
 

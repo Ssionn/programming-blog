@@ -29,15 +29,13 @@
                 @method('PATCH')
 
                 <div>
-                    <x-input-label for="current_password" :value="__('Current Password')" />
-                    <p class="text-xs text-black">Enter your current password</p>
+                    <p class="text-xs text-black mt-3">Enter your current password</p>
                     <x-text-input id="current_password" class="block mt-1 w-full" type="password" name="current_password"
                         required />
                 </div>
 
                 <div>
-                    <x-input-label for="password" :value="__('New Password')" />
-                    <p class="text-xs text-black">Enter your new password</p>
+                    <p class="text-xs text-black mt-3">Enter your new password</p>
                     <x-text-input id="password" class="block mt-1 w-full" type="password" name="password"
                         required />
                 </div>
@@ -55,8 +53,7 @@
                     <p class="text-xs text-black">You are logged in using the {{ ucfirst(Auth::user()->provider) }}
                         provider. You do not have a password set. You can set a password by entering a new password below.
                     </p>
-                    <x-input-label for="oauth_password" :value="__('New Password')" />
-                    <p class="text-xs text-black">Enter your new password</p>
+                    <p class="text-xs text-black mt-3">Enter your new password</p>
                     <x-text-input id="oauth_password" class="block mt-1 w-full" type="password" name="oauth_password"
                         required />
                 </div>

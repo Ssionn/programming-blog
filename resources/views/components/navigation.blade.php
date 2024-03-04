@@ -1,7 +1,7 @@
 <div>
     @if (Auth::check())
         <div class="flex md:flex-row flex-col justify-center md:justify-end md:space-x-7 md:pr-16 mt-6 items-center">
-            <a href="{{ route('settings.edit') }}" class="hover:scale-105 transition ease-in-out delay-150 hover:bg-orange-300 rounded-md px-4 py-1">
+            <x-active-link :active="request()->routeIs('settings.edit')" href="{{ route('settings.edit') }}" class="">
                 <span class="text-lg font-semibold text-white">
                     @if (! empty(Auth::user()->username))
                         {{ Auth::user()->username }}
@@ -9,7 +9,7 @@
                         {{ Auth::user()->name }}
                     @endif
                 </span>
-            </a>
+            </x-active-link>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="px-4 py-1 bg-indigo-500 rounded">

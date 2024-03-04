@@ -26,7 +26,7 @@
                 @endforeach
                 {{ $comments->links() }}
             @else
-                <p>No comments yet!</p>
+                <p class="text-center">Be the first to comment!</p>
             @endif
         </div>
     </section>

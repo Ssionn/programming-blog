@@ -26,6 +26,13 @@ class BlogpostController extends Controller
         return view('blogpost.index', compact('posts', 'images'));
     }
 
+    public function show($id)
+    {
+        $post = $this->postRepository->showPost($id);
+
+        return view('blogpost.show', compact('post'));
+    }
+
     public function create()
     {
         if (! Auth::check()) {

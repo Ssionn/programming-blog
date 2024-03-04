@@ -25,6 +25,7 @@ Route::get('/blogpost', [BlogpostController::class, 'index'])->name('blogpost.in
 
 Route::middleware('auth')->group(function () {
     Route::get('/blogpost/create', [BlogpostController::class, 'create'])->name('blogpost.create');
+    Route::get('/blogpost/{id}', [BlogpostController::class, 'show'])->name('blogpost.show');
     Route::post('/blogpost/store', [BlogpostController::class, 'store'])->name('blogpost.store');
     Route::post('/upload/{id}', [UploadController::class, 'store'])->name('upload.store');
     Route::delete('/blogpost/delete/{id}', [BlogpostController::class, 'delete'])->name('blogpost.delete');
@@ -34,7 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::patch('/settings', [SettingsController::class, 'update'])->name('settings.update');
     Route::patch('/settings/password', [SettingsController::class, 'changePassword'])->name('settings.password');
-    Route::patch('/settings/oauth/password', [SettingsController::class, 'createOAuthPassword'])->name('settings.oauth');
+    Route::patch('/settings/oauth/password', [SettingsController::class, 'createOAuthPassword'])
+        ->name('settings.oauth');
     Route::delete('/settings', [SettingsController::class, 'destroy'])->name('settings.delete');
 });
 

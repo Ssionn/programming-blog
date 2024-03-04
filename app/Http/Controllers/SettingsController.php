@@ -84,11 +84,17 @@ class SettingsController extends Controller
             return Redirect::route('settings.edit')->with('status', 'account-deleted-error');
         }
 
-        $request->user()->delete();
+        $user = $request->user();
+
+        $user->posts()->delete();
+
+        Auth::logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+        $user->delete();
 
         return Redirect::route('blogpost.index')->with('status', 'account-deleted');
     }

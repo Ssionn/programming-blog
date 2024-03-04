@@ -5,7 +5,7 @@
 @section('content')
     @auth
         @if (auth()->user()->provider !== null && auth()->user()->password === null)
-            <div class="flex justify-center items-center mt-5">
+            <div class="flex justify-center items-center mt-5 p-4">
                 <div class="sm:1/3 lg:w-2/5 bg-white rounded-md p-2">
                     <h1 class="text-md">You've created an account with a provider, but a password has not
                         been
@@ -16,34 +16,35 @@
         @endif
     @endauth
 
-    @if (session('status') === 'account-deleted')
-        <div class="sm:1/3 lg:w-2/5">
-            <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)"
-                class="text-sm text-white bg-green-900 rounded-md p-2 mt-2">
-                @auth
-                    {{ __('Account Succesfully Deleted') }}
-                @else
-                    {{ __('Account Succesfully Deleted') }}
-                @endauth
-            </p>
-        </div>
-    @endif
 
-    <div class="flex justify-center md:mt-10 w-full">
+    <div class="flex justify-center flex-col md:mt-10 w-full">
+        <div class="flex justify-center items-center">
+            @if (session('status') === 'account-deleted')
+                <div class="sm:1/3 lg:w-2/5">
+                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)"
+                        class="text-sm text-white bg-green-900 rounded-md p-2 mt-2">
+                        @auth
+                            {{ __('Account Succesfully Deleted') }}
+                        @else
+                            {{ __('Account Succesfully Deleted') }}
+                        @endauth
+                    </p>
+                </div>
+            @endif
+        </div>
         @if ($posts->count() > 0)
             <h1 class="text-2xl md:text-4xl font-semibold text-white text-center mt-5">Featured Blog Posts</h1>
         @else
             <p class="text-center text-white text-2xl md:text-4xl font-semibold mt-5">No featured posts available</p>
         @endif
 
-        <div class="flex flex-col justify-center sm:flex-row items-center mt-10 mb-20">
-            <div class="w-1/12 md:w-1/5">
-            </div>
+        <div class="flex flex-col justify-center sm:flex-row mt-10">
+            <aside></aside>
             <div class="w-full md:w-2/4 space-y-10 p-4 md:p-0">
                 @if ($posts->count() > 0)
                     @foreach ($posts as $post)
-                        <div class="flex flex-col bg-white rounded-lg border border-gray-200">
-                            <div class="flex justify-between items-center p-8">
+                        <div class="flex flex-col bg-white rounded-lg">
+                            <div class="flex justify-between items-center pt-4 pl-4 pr-4">
                                 <div class="flex items-center">
                                     <div class="ml-2">
                                         <p class="text-sm font-semibold">{{ $post->user->name }}</p>
@@ -63,8 +64,12 @@
                                     </form>
                                 @endif
                             </div>
-                            <div class="px-4 pb-10 pl-10 pr-10">
-                                <h1 class="text-xl font-semibold">{{ $post->title }}</h1>
+                            <div class="pl-6 pb-10 mt-2">
+                                <a href="{{ route('blogpost.show', $post->id) }}">
+                                    <h1
+                                        class="text-xl font-semibold hover:text-indigo-500 transition ease-out-in delay-150 hover:scale-105">
+                                        {{ $post->title }}</h1>
+                                </a>
 
                                 @foreach ($images as $image)
                                     <div class="mt-10">
@@ -74,15 +79,11 @@
 
                                 <p class="mt-6 text-gray-700">{{ $post->content }}</p>
                             </div>
-                            <div class="pl-1 pr-1 sm:pl-4 sm:pr-4">
-                                <livewire:comments :model="$post" />
-                            </div>
                         </div>
                     @endforeach
                 @endif
             </div>
-            <div class="w-1/12 md:w-1/5">
-            </div>
+            <aside></aside>
         </div>
     </div>
 @endsection
