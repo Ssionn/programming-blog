@@ -7,10 +7,31 @@
         <p class="text-xs text-black">Are you sure you want to delete your account? This action cannot be undone.</p>
     </div>
 
+    @if (auth()->user()->password === null)
+        <div>
+            <p class="text-red-500 text-xs">To be able to delete your account you have to set a password up first</p>
+        </div>
+    @endif
+
+    @if (session('status') === 'account-deleted-error')
+        <div class="w-full">
+            <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)"
+                class="text-sm text-white bg-red-900 rounded-md p-2 mt-2">
+                {{ __('Password was incorrect, failed to delete. Try again.') }}
+            </p>
+        </div>
+    @endif
+
     <div class="mt-5 w-1/2 flex flex-row space-x-2 items-center">
-        <x-danger-button data-modal-target="popup-modal" data-modal-toggle="popup-modal">
-            {{ __('Delete') }}
-        </x-danger-button>
+        @if (auth()->user()->password === null)
+            <x-danger-button data-modal-target="popup-modal" data-modal-toggle="popup-modal" disabled>
+                {{ __('Delete') }}
+            </x-danger-button>
+        @else
+            <x-danger-button data-modal-target="popup-modal" data-modal-toggle="popup-modal">
+                {{ __('Delete') }}
+            </x-danger-button>
+        @endif
     </div>
 
     <div id="popup-modal" tabindex="-1"
@@ -39,17 +60,8 @@
                         @csrf
                         @method('DELETE')
 
-                        @if (session('status') === 'password-incorrect')
-                            <div class="flex justify-center items-center">
-                                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)"
-                                    class="text-sm text-white bg-red-900 rounded-md p-2 mt-2">
-                                    {{ __('Password was incorrect, try again.') }}
-                                </p>
-                            </div>
-                        @endif
-
-                        <x-text-input id="password" type="password" class="mt-3 mb-3" name="password" required
-                            placeholder="Password" />
+                        <x-text-input id="delete_account" type="password" class="mt-3 mb-3" name="delete_account"
+                            required placeholder="Password" />
 
                         <x-danger-button>
                             {{ __('Yes, I\'m Sure') }}

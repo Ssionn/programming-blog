@@ -11,11 +11,6 @@ use App\Http\Controllers\Auth\LoginController;
 
 class SettingsController extends Controller
 {
-    public function __construct(
-        protected LoginController $loginController
-    ) {
-    }
-
     public function edit()
     {
         return view('settings.edit', [
@@ -47,25 +42,53 @@ class SettingsController extends Controller
         return Redirect::route('settings.edit')->with('status', 'username-updated');
     }
 
-    public function destroy(Request $request)
+    public function changePassword(Request $request): RedirectResponse
     {
         $request->validate([
-            'password' => ['required', 'string', 'min:8'],
+            'current_password' => ['required', 'min:8'],
+            'password' => ['required', 'min:8'],
         ]);
 
-        if (!Hash::check($request->password, $request->user()->password)) {
+        if (! Hash::check($request->current_password, $request->user()->password)) {
             return Redirect::route('settings.edit')->with('status', 'password-incorrect');
         }
 
-        $user = $request->user();
+        $request->user()->password = Hash::make($request->password);
 
-        Auth::logout();
+        $request->user()->save();
+
+        return Redirect::route('settings.edit')->with('status', 'password-updated');
+    }
+
+
+    public function createOAuthPassword(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'oauth_password' => ['required', 'min:8'],
+        ]);
+
+        $request->user()->password = Hash::make($request->oauth_password);
+
+        $request->user()->save();
+
+        return Redirect::route('settings.edit')->with('status', 'oauth-password-updated');
+    }
+
+    public function destroy(Request $request)
+    {
+        $request->validate([
+            'delete_account' => ['required', 'min:8'],
+        ]);
+
+        if (! Hash::check($request->delete_account, $request->user()->password)) {
+            return Redirect::route('settings.edit')->with('status', 'account-deleted-error');
+        }
+
+        $request->user()->delete();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-
-        $user->delete();
 
         return Redirect::route('blogpost.index')->with('status', 'account-deleted');
     }

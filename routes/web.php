@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::patch('/settings', [SettingsController::class, 'update'])->name('settings.update');
+    Route::patch('/settings/password', [SettingsController::class, 'changePassword'])->name('settings.password');
+    Route::patch('/settings/oauth/password', [SettingsController::class, 'createOAuthPassword'])->name('settings.oauth');
     Route::delete('/settings', [SettingsController::class, 'destroy'])->name('settings.delete');
 });
 

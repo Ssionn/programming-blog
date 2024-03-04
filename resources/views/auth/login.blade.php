@@ -46,10 +46,10 @@
                 <div>
                     <div class="flex items-center justify-between">
                         <label for="password" class="block text-sm font-medium leading-6 text-white">Password</label>
-                        <div class="text-sm">
+                        {{-- <div class="text-sm">
                             <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot
                                 password?</a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="mt-2">
                         <input id="password" name="password" type="password" autocomplete="current-password" required
@@ -66,7 +66,7 @@
 
             <p class="mt-10 text-center text-sm text-white">
                 Not a member?
-                <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Register Here</a>
+                <a href="{{ route('register') }}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Register Here</a>
             </p>
         </div>
     </div>

@@ -8,16 +8,16 @@
     </h2>
 
     <div class="flex flex-col justify-center items-center mt-10 space-y-10">
-        <div class="sm:w-1/2">
+        <div class="lg:w-1/2 w-full p-4">
             @include('settings.partials.update-username-form')
         </div>
 
-        {{-- if the user has a provider don't show this --}}
-        {{-- this Attempt to read property "provider" on null --}}
-        @if (auth()->check() && auth()->user()->provider_id === null)
-            <div class="sm:w-1/2">
-                @include('settings.partials.delete-account-form')
-            </div>
-        @endif
+        <div class="lg:w-1/2 w-full p-4">
+            @include('settings.partials.update-password-form')
+        </div>
+
+        <div class="lg:w-1/2 w-full p-4">
+            @include('settings.partials.delete-account-form')
+        </div>
     </div>
 @endsection

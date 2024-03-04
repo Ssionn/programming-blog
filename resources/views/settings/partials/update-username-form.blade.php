@@ -1,21 +1,21 @@
 <div class="bg-white rounded-md p-4">
+    
+    <h3 class="text-xl md:text-2xl text-black font-semibold">
+        {{ __('Update Username') }}
+    </h3>
+
+    @if (session('status') === 'email-not-updated')
+        <div class="flex justify-center items-center">
+            <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)"
+                class="text-sm text-white bg-red-900 rounded-md p-2 mt-2">
+                {{ __('Sorry, your email change has failed due to you being logged in using the ' . ucfirst(Auth::user()->provider) . ' provider.') }}
+            </p>
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('settings.update') }}">
         @csrf
         @method('patch')
-
-        {{-- Title Update Username --}}
-        <h3 class="text-xl md:text-2xl text-black font-semibold">
-            {{ __('Update Username') }}
-        </h3>
-
-        @if (session('status') === 'email-not-updated')
-            <div class="flex justify-center items-center">
-                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)"
-                    class="text-sm text-white bg-red-900 rounded-md p-2 mt-2">
-                    {{ __('Sorry, your email change has failed due to you being logged in using the ' . ucfirst(Auth::user()->provider) . ' provider.') }}
-                </p>
-            </div>
-        @endif
 
         <div>
             <x-input-label for="username" :value="__('Username')" />
