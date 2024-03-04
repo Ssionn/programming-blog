@@ -66,3 +66,18 @@ You then visit
 ```
 {YourProjectName}.test/
 ```
+
+## What does it look like?
+
+![CleanShot 2024-03-04 at 16 59 17@2x](https://github.com/Ssionn/programming-blog/assets/90753599/4d82a023-084f-4791-8ca4-796c9ac91b4c)
+
+![CleanShot 2024-03-04 at 17 02 30@2x](https://github.com/Ssionn/programming-blog/assets/90753599/dedc178d-d9de-4b48-9877-a66e9747058f)
+
+![CleanShot 2024-03-04 at 17 00 54@2x](https://github.com/Ssionn/programming-blog/assets/90753599/2174bb4a-5b65-47e2-a375-977a43e46133)
+
+![CleanShot 2024-03-04 at 17 01 39@2x](https://github.com/Ssionn/programming-blog/assets/90753599/5b64a2fc-f95b-4bec-8141-8432a5fc3252)
+
+![CleanShot 2024-03-04 at 17 02 00@2x](https://github.com/Ssionn/programming-blog/assets/90753599/9d884b1d-43f0-4cf4-a114-ac8da4cb23e8)
+
+
+
