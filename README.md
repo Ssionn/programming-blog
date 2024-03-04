@@ -1,6 +1,4 @@
-# image-uploader
-
-This repository contains an image uploader (Also works with videos). This has been made with Laravel and Tailwindcss. The package consists of using the FilePond CDN.
+# Programming-blog
 
 ## Installation
 
