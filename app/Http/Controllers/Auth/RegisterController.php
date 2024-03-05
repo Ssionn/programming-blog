@@ -23,6 +23,7 @@ class RegisterController extends Controller
             'password' => 'required|min:8',
         ]);
 
+        // change this to querybuilder not this garbage
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
