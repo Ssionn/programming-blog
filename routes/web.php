@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\BlogpostController;
@@ -21,9 +22,8 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::redirect('/', '/blogpost', 308);
 
-Route::get('/blogpost', [BlogpostController::class, 'index'])->name('blogpost.index');
-
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/blogpost', [BlogpostController::class, 'index'])->name('blogpost.index');
     Route::get('/blogpost/create', [BlogpostController::class, 'create'])->name('blogpost.create');
     Route::get('/blogpost/{id}', [BlogpostController::class, 'show'])->name('blogpost.show');
     Route::post('/blogpost/store', [BlogpostController::class, 'store'])->name('blogpost.store');
@@ -40,12 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/settings', [SettingsController::class, 'destroy'])->name('settings.delete');
 });
 
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Auth::routes([
+    'verify' => true,
+]);
 
 Route::get('/auth/{provider}/redirect', [OAuthController::class, 'redirect']);
 Route::get('/auth/{provider}/callback', [OAuthController::class, 'callback']);

@@ -9,7 +9,7 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" action="{{ route('login.authenticate') }}" method="POST">
+            <form class="space-y-6" action="{{ route('login') }}" method="POST">
                 @csrf
 
                 <h1 class="text-white text-sm font-bold text-center">Sign in with OAuth</h1>
@@ -46,10 +46,10 @@
                 <div>
                     <div class="flex items-center justify-between">
                         <label for="password" class="block text-sm font-medium leading-6 text-white">Password</label>
-                        {{-- <div class="text-sm">
+                        <div class="text-sm">
                             <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot
                                 password?</a>
-                        </div> --}}
+                        </div>
                     </div>
                     <div class="mt-2">
                         <input id="password" name="password" type="password" autocomplete="current-password" required

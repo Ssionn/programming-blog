@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    public function index()
+    public function showRegistrationForm()
     {
         return view('auth.register');
     }
 
-    public function store(Request $request)
+    public function register(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|max:255',
@@ -32,6 +32,6 @@ class RegisterController extends Controller
 
         auth()->attempt($request->only('email', 'password'));
 
-        return redirect()->route('login');
+        return redirect()->route('blogpost.index');
     }
 }

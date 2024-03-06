@@ -38,6 +38,10 @@ class OAuthController extends Controller
 
             Auth::login($user);
 
+            if (! $user->hasVerifiedEmail()) {
+                $user->sendEmailVerificationNotification();
+            }
+            
             return redirect()->route('blogpost.index');
         } catch (\Exception $e) {
             return redirect()->route('login')->with('error', 'Something went wrong with ' . $provider . ' login');

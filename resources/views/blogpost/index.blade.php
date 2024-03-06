@@ -32,6 +32,7 @@
                 </div>
             @endif
         </div>
+
         @if ($posts->count() > 0)
             <h1 class="text-2xl md:text-4xl font-semibold text-white text-center mt-5">Featured Blog Posts</h1>
         @else

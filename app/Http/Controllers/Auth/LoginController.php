@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    public function authenticate(Request $request): RedirectResponse
+    public function login(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -37,12 +37,6 @@ class LoginController extends Controller
         Auth::logout();
 
         if ($request->session()->has('provider')) {
-            if (! $request->session()->has('token')) {
-                $request->session()->regenerateToken();
-
-                return redirect()->route('blogpost.index');
-            }
-
             return $this->sessionInvalidationAndRedirect($request);
         }
 
@@ -55,6 +49,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('blogpost.index');
+        return redirect()->route('login');
     }
 }
