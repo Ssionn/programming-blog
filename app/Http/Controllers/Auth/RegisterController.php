@@ -23,13 +23,12 @@ class RegisterController extends Controller
             'password' => 'required|min:8',
         ]);
 
-        // change this to querybuilder not this garbage
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->username = $request->username;
-        $user->password = Hash::make($request->password);
-        $user->save();
+        User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
         auth()->attempt($request->only('email', 'password'));
 
